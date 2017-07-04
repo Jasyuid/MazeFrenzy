@@ -136,7 +136,7 @@ public class Menu {
 				screen.addText(new StringObject("PLAY", 490-menuX, 420, 40, Color.WHITE));
 				screen.addText(new StringObject("ABOUT", 470-menuX, 470, 40, color));
 			}
-			screen.addText(new StringObject("Made by Protrance", 10-menuX, 690, 20, Color.WHITE));
+			screen.addText(new StringObject("Made by Justin Symmank", 10-menuX, 690, 20, Color.WHITE));
 		}
 		
 		//About Menu
