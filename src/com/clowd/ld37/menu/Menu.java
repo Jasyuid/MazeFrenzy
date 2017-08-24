@@ -38,6 +38,7 @@ public class Menu {
 		bgy--;
 		if(bgy <= -700*2) bgy = 0;
 		
+		//Changes menu state or starts game
 		if(state == 0){
 			if(Keyboard.keyTyped(KeyEvent.VK_DOWN) && selected < 1){
 				selected++;
@@ -71,6 +72,7 @@ public class Menu {
 		
 		if(menuX > 400) selected = 0;
 		
+		//Menu change animation
 		if(targetX > menuX){
 			if(menuX >= targetX /2){
 				menuX += (targetX - menuX) / 3;
@@ -93,6 +95,7 @@ public class Menu {
 			if(menuX < targetX) menuX = targetX;
 		}
 		
+		//Gradually changes color
 		colorTimer++;
 		if(colorTimer < 50){
 			color = ((int)(0xcc11aa + 1.05*colorTimer));
@@ -107,6 +110,7 @@ public class Menu {
 	}
 	
 	public void render(Screen screen){
+		//Renders Scroling background
 		screen.renderRect(0, bgy, screen.getWidth(), 300, 0x232323);
 		screen.renderRect(0, bgy+screen.getHeight()/3, screen.getWidth(), screen.getHeight()/3, 0x3F3F3F);
 		screen.renderRect(0, bgy+screen.getHeight()*2/3, screen.getWidth(), screen.getHeight()/3+1, 0x232323);
@@ -118,7 +122,6 @@ public class Menu {
 		screen.renderRect(0, bgy+screen.getHeight()*8/3, screen.getWidth(), screen.getHeight()/3+1, 0x232323);
 		
 		//Main Menu
-		
 		if(menuX < 1100){
 			for(int i = 0; i < Sprite.title.getPixels().length; i++){
 				if(Sprite.title.getPixels()[i] == 0xff000000){

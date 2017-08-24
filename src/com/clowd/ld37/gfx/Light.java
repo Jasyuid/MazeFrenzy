@@ -2,7 +2,7 @@ package com.clowd.ld37.gfx;
 
 public class Light {
 	
-	
+	//Shifts red green and blue color channels proportionally up or down
 	public static int changeBrightness(int col, int a){
 		int r = (col & 0xff0000) >> 16;
 		int g = (col & 0xff00) >> 8;

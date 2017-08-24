@@ -26,16 +26,16 @@ import com.clowd.ld37.gfx.StringObject;
 import com.clowd.ld37.input.Keyboard;
 
 public class Game extends Canvas implements Runnable{
-
+	//Window
 	private JFrame frame;
 	private final String TITLE = "Maze Frenzy";
 	private final int WIDTH = 1100;
 	private final int HEIGHT = 700;
-	private final int SCALE = 1;
-	
+	private final int SCALE = 1; 
+	//Thread
 	private Thread thread;
 	private boolean running = false;
-	
+	//Buffered Image
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	
@@ -43,6 +43,7 @@ public class Game extends Canvas implements Runnable{
 	private StateManager manager;
 	
 	public Game(){
+		//Creates Canvas
 		Dimension size = new Dimension(WIDTH*SCALE, HEIGHT*SCALE);
 		setPreferredSize(size);
 		
@@ -52,17 +53,18 @@ public class Game extends Canvas implements Runnable{
 		
 		manager = new StateManager(this);
 		
+		//Adds font to library
 		GraphicsEnvironment ge = null;
 	    try{
 	      ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 	      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResourceAsStream("/fonts/Audiowide-Regular.ttf"))); //Audiowide
 	    } catch(FontFormatException e){} catch (IOException e){}  
-	    
 	    System.setProperty("prism.lcdtext", "false");
 	    
 	}
 	
 	public void start(){
+		//Creates main thread
 		if(!running){
 			running = true;
 			thread = new Thread(this, "Game Thread");
@@ -71,6 +73,7 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	public void stop(){
+		//Stops main thread
 		if(running){
 			running = false;
 			try {
@@ -82,6 +85,7 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	public void run(){
+		//Time vars
 		long lastTime = System.nanoTime();
 		long lastTimer = System.currentTimeMillis();
 		double ns = 1000000000.0 / 100.0;
@@ -90,20 +94,23 @@ public class Game extends Canvas implements Runnable{
 		int updates = 0;
 		
 		requestFocus();
+		//Game loop
 		while(running){
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
 			lastTime = now;
 			
+			//Updates
 			if(delta >= 1){
 				update();
 				updates++;
 				delta--;
 			}
-			
+			//Rendering
 			render();
 			frames++;
-		
+			
+			//Frame and update counters
 			while(System.currentTimeMillis() - lastTimer > 1000){
 				lastTimer += 1000;
 				System.out.println("UPS: " + updates + ", FPS: " + frames);
@@ -114,23 +121,27 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	public void update(){
+		//Updates state manager
 		manager.update();
 		
 	}
 	
 	public void render(){
+		//Creates buffer strategy with 3 buffers
 		BufferStrategy bs = getBufferStrategy();
 		if(bs == null){
 			createBufferStrategy(3);
 			return;
 		}
 		
+		//Sets graphics in screen and clears them
 		Graphics g = bs.getDrawGraphics();
 		screen.graphics(g);
 		screen.clear();
 		
 		Graphics2D graphics2d = (Graphics2D) g;
 		
+		//Adds antialiasing to text
 		graphics2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		
 		manager.render(screen);
@@ -140,7 +151,7 @@ public class Game extends Canvas implements Runnable{
 		}
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 		
-		
+		//Draw text from string buffer
 		for(StringObject so : screen.stringBuffer){
 			String s = so.string;
 			g.setColor(so.color);
@@ -149,6 +160,7 @@ public class Game extends Canvas implements Runnable{
 		}
 		screen.stringBuffer.clear();
 		
+		//Draws pause graphics
 		if(screen.pause && manager.getState() == 2){
 			g.setColor(new Color((0xcc00aa & 0xff0000) >> 16, (0xcc00aa & 0xff00) >> 8, (0xcc00aa & 0xff), 255));
 			g.fillRect(0, 290, screen.getWidth(), 170);
@@ -168,7 +180,7 @@ public class Game extends Canvas implements Runnable{
 	
 	public static void main(String[] args){
 		Game game = new Game();
-		
+		//Creates the frame
 		game.frame = new JFrame();
 		game.frame.setResizable(false);
 		game.frame.setTitle(game.TITLE);
@@ -177,7 +189,7 @@ public class Game extends Canvas implements Runnable{
 		game.frame.setLocationRelativeTo(null);
 		game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		game.frame.setVisible(true);
-		
+		//Sets icon
 		URL url = Game.class.getResource("/icon.png");
 		ImageIcon imgicon = new ImageIcon(url);
 		game.frame.setIconImage(imgicon.getImage());

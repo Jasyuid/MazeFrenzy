@@ -28,7 +28,7 @@ public class StateManager {
 	private IntroScreen intro;
 	private Menu menu;
 	private Level level;
-	
+	//Background coords
 	protected double bgX, bgY;
 	
 	public StateManager(Game game){
@@ -53,6 +53,7 @@ public class StateManager {
 		}else if(state == 1){
 			menu.update();
 		}else if(state == 2){
+			//Moves background
 			bgX+=0.5;
 			bgY-=0.4;
 			if(bgX >= 200) bgX = 0;

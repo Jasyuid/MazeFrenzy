@@ -7,7 +7,7 @@ public class Sprite {
 	private Texture texture;
 	private int[] pixels;
 	
-	
+	//All loaded sprites
 	public static Sprite test = new Sprite(Texture.test, 0, 0, 50, 50);
 	
 	public static Sprite title = new Sprite(Texture.title, 0, 0, 930, 306);

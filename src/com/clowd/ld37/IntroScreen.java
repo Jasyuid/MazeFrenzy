@@ -12,6 +12,7 @@ public class IntroScreen {
 	
 	private StateManager manager;
 	
+	//String color and timer for color change
 	private int color;
 	private double colorTimer;
 	
@@ -27,6 +28,7 @@ public class IntroScreen {
 			Sound.enter.play(false);
 		}
 		
+		//Gradually changes color
 		colorTimer++;
 		if(colorTimer < 50){
 			color = ((int)(0xcc11aa + 1.05*colorTimer));

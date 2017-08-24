@@ -22,17 +22,17 @@ public class Screen {
 		this.height = height;
 		pixels = new int[width*height];
 	}
-	
+	//Clears pixel array
 	public void clear(){
 		for(int i = 0; i < pixels.length; i++){
 			pixels[i] = 0;
 		}
 	}
-	
+	//Sets graphics value
 	public void graphics(Graphics g){
 		this.g = g;
 	}
-	
+	//Draw a color rectangle
 	public void renderRect(int xp, int yp, int w, int h, int color){
 		for(int y = 0; y < h; y++){
 			int yy = y + yp;
@@ -44,7 +44,7 @@ public class Screen {
 			}
 		}
 	}
-	
+	//Draw a texture
 	public void renderTexture(Sprite sprite, int xp, int yp){
 		for(int y = 0; y < sprite.getHeight(); y++){
 			int yy = y + yp;
@@ -58,7 +58,7 @@ public class Screen {
 			}
 		}
 	}
-	
+	//Render a renderable object
 	public void render(int xp, int yp, Renderable renderable){
 		for(int y = 0; y < renderable.getHeight(); y++){
 			int yy = y + yp;
@@ -70,7 +70,7 @@ public class Screen {
 			}
 		}
 	}
-	
+	//Adds shading to screen
 	public void shade(int xp, int yp, int w, int h, int amount){
 		for(int y = 0; y < h; y++){
 			int yy = y + yp;
@@ -82,7 +82,7 @@ public class Screen {
 			}
 		}
 	}
-	
+	//Adds a string to the string buffer
 	public void addText(StringObject so){
 		stringBuffer.add(so);
 	}
