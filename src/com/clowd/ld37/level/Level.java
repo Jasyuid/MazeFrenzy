@@ -20,19 +20,23 @@ import com.clowd.ld37.level.tile.Tile;
 
 public class Level {
 	
+	//Level 
 	protected String path;
 	protected int width, height;
 	protected int[] tiles;
 	
 	protected int levelNum;
 	
+	//Coord data
 	protected int levelX, levelY;
 	protected double playerX, playerY;
 	protected int spawnX, spawnY;
 	
+	//Trap vars
 	protected int range;
 	protected boolean trapVision;
 	
+	//Item vars
 	protected boolean lightBomb;
 	protected int lightBombD;
 	protected boolean lightBall;
@@ -41,11 +45,13 @@ public class Level {
 	protected int trapSensorD;
 	protected int itemTimer;
 	
+	//Spawn vars
 	protected boolean start;
 	protected int startTimer;
 	protected int startX;
 	protected int startY;
 	
+	//Goal vars
 	protected boolean end;
 	protected int endX;
 	protected int endY;
@@ -54,22 +60,26 @@ public class Level {
 	
 	protected boolean pause;
 	
+	//Timer
 	protected int timeS;
 	protected int timeMS;
 	
+	//Level color
 	protected int tileCol;
 	protected double timerCol;
 	
 	protected boolean respawn;
-	
+	//Level ratings
 	protected static String[] ratings = new String[]{"A", "A", "", "A", "A", "", "", "", "", "", "A", "", "", ""};
 	
+	//Entity lists
 	protected List<Entity> entities = new ArrayList<Entity>();
 	protected List<Entity> addentities = new ArrayList<Entity>();
 	protected List<Entity> removeenetities = new ArrayList<Entity>();
 	
 	protected StateManager manager;
 	
+	//Set up level from image
 	public Level(String path, StateManager manager){
 		this.path = path;
 		this.manager = manager;
@@ -103,6 +113,7 @@ public class Level {
 		loadLevel();
 	}
 	
+	//Load level from image
 	public void loadLevel(){
 		try{
 			BufferedImage image = ImageIO.read(Level.class.getResourceAsStream(path));
@@ -147,9 +158,11 @@ public class Level {
 	}
 	
 	public void update(){
+		//Pause
 		if(Keyboard.keyTyped(KeyEvent.VK_ESCAPE)) pause = !pause;
 		if(!pause){
-
+		
+		//Item updates
 		if(!lightBomb && !lightBall) rangeGo(40);
 		if(!trapSensor) trapVision = false;
 		
@@ -177,6 +190,7 @@ public class Level {
 			trapVision = true;
 		}
 		
+		//Start and end info animation
 		if(startY > 0){
 			startY -= 20;
 		}
@@ -218,7 +232,8 @@ public class Level {
 		}else{
 			timerCol = 0;
 		}
-
+		
+		//Check for traps
 		if(Keyboard.keyTyped(KeyEvent.VK_SPACE)){
 			boolean h = false;
 			for(Entity e : entities){
@@ -244,6 +259,7 @@ public class Level {
 		}
 	}
 	
+	//Animate the changing view distance
 	public void rangeGo(int target){
 		if(range < target){
 			range+=5;
@@ -298,6 +314,7 @@ public class Level {
 		
 		}
 		
+		//Render traps if on
 		for(Entity e : entities){
 			if(e instanceof Trap && ((Trap)e).getOn()){
 				e.render(screen);
@@ -329,6 +346,7 @@ public class Level {
 		
 	}
 	
+	//Get tile type
 	public Tile getTile(int x, int y){
 		if(tiles[x+y*width] == 0xffff0000) return Tile.floortile;
 		else if(tiles[x+y*width] == 0xff000000) return Tile.walltile;

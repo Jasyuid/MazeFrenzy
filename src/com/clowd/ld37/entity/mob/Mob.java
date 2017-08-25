@@ -8,6 +8,7 @@ public class Mob extends Entity{
 
 	protected double speed;
 	
+	//Create mob at coords
 	public Mob(Level level, double x, double y){
 		super(level, x, y);
 	}
@@ -20,6 +21,7 @@ public class Mob extends Entity{
 		super(level);
 	}
 	
+	//Move mob specific distance
 	public void move(double xa, double ya){
 		if(xa!=0 && ya!=0){
 			move(xa*0.71, 0);
@@ -27,6 +29,7 @@ public class Mob extends Entity{
 			return;
 		}
 		
+		//Check for tile collision at target x position
 		while(xa != 0){
 			if(Math.abs(xa) > 1){
 				if(!tileCollision(abs(xa), ya)){
@@ -40,7 +43,7 @@ public class Mob extends Entity{
 				xa = 0;
 			}
 		}
-		
+		//Check for tile collision at target y position
 		while(ya != 0){
 			if(Math.abs(ya) > 1){
 				if(!tileCollision(xa, abs(ya))){
@@ -56,11 +59,13 @@ public class Mob extends Entity{
 		}
 	}
 	
+	//Return if number is positive or negative
 	public double abs(double val){
 		if(val > 0) return 1;
 		return -1;
 	}
 	
+	//Check for tile collision
 	public boolean tileCollision(double xa, double ya){
 		boolean solid = false;
 		for(int c = 0; c < 4; c++){

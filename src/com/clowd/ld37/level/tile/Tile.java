@@ -4,7 +4,8 @@ import com.clowd.ld37.gfx.Screen;
 import com.clowd.ld37.gfx.Sprite;
 
 public class Tile {
-
+	
+	//All tiles
 	public static Tile floortile = new FloorTile(0xcccccc);
 	public static Tile walltile = new WallTile(0xcc11aa);
 	public static Tile endtile = new FloorTile(0xffffff);
@@ -14,6 +15,7 @@ public class Tile {
 	protected Sprite sprite;
 	protected int col;
 	
+	//Create tile with color
 	protected Tile(int col){
 		this.col = col;
 	}
@@ -26,6 +28,7 @@ public class Tile {
 		
 	}
 	
+	//Does tile have collision
 	public boolean isSolid(){
 		return false;
 	}

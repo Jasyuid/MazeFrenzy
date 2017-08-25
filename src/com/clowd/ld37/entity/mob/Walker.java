@@ -10,6 +10,7 @@ public class Walker extends Mob{
 	private int dr, rg;
 	private double ix, iy;
 	
+	//Create a walker enemy with a certain direction(dr) and walking range(rg)
 	public Walker(Level level, double x, double y, int type, int dr, int rg){
 		super(level, x, y, type);
 		this.dr = dr;
@@ -32,6 +33,7 @@ public class Walker extends Mob{
 	}
 	
 	public void update(){
+		//Move walker back and forth
 		xa = 0; ya = 0;
 		
 		if(dr == 0){
@@ -60,7 +62,7 @@ public class Walker extends Mob{
 			move(xa, ya);
 		}
 	}
-	
+	//Render sprite
 	public void render(Screen screen){
 		screen.renderTexture(sprite, (int)x, (int)y);
 	}

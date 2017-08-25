@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 public class StringObject {
-
+	//Create a string object with text, coords, color, and font
 	public String string;
 	public int xp;
 	public int yp;

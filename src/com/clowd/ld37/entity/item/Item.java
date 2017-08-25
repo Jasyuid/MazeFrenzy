@@ -11,6 +11,7 @@ public class Item extends Entity{
 
 	protected int type;
 	
+	//Create item and set type
 	public Item(Level level, double x, double y, int type){
 		super(level, x, y);
 		if(type == 0){
@@ -29,6 +30,7 @@ public class Item extends Entity{
 
 	}
 	
+	//Render sprite associated with item
 	public void render(Screen screen){
 		screen.renderTexture(sprite, (int)x, (int)y);
 	}

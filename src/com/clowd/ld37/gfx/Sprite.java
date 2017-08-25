@@ -29,7 +29,7 @@ public class Sprite {
 	public static Sprite trapon = new Sprite(30, 30, 0x00dddd);
 	public static Sprite trapoff = new Sprite(30, 30, 0x006666);
 	
-	
+	//Creates sprite from texture
 	public Sprite(Texture texture, int x, int y, int w, int h){
 		width = w;
 		height = h;
@@ -40,6 +40,7 @@ public class Sprite {
 		create(width, height);
 	}
 	
+	//Create a single color sprite
 	public Sprite(int w, int h, int col){
 		width = w;
 		height = h;

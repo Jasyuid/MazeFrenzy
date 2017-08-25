@@ -14,6 +14,7 @@ public class Player extends Mob{
 
 	private double xa, ya;
 	
+	//Create player and get dimensions
 	public Player(Level level, double x, double y){
 		super(level ,x, y);
 		sprite = sprite.player;
@@ -23,6 +24,7 @@ public class Player extends Mob{
 	}
 	
 	public void update(){
+		//Move player
 		xa = 0; ya = 0;
 		
 		if(Keyboard.keyPressed(KeyEvent.VK_UP) || Keyboard.keyPressed(KeyEvent.VK_W)) ya-=speed;
@@ -36,6 +38,7 @@ public class Player extends Mob{
 		level.setPlayerX(x);
 		level.setPlayerY(y);
 		
+		//Get entity collisions
 		for(Entity e : level.getEntites()){
 			if((e.getX() < x + width && e.getX() + e.getWidth() > x) && (e.getY() < y + height && e.getY() + e.getHeight() > y)){
 				if(e instanceof Item){
@@ -68,6 +71,7 @@ public class Player extends Mob{
 			}
 		}
 		
+		//Respawn code
 		if(level.getRespawn()){
 			level.setRespawn(false);
 			x = level.getSpawnX();
@@ -78,6 +82,7 @@ public class Player extends Mob{
 		
 	}
 	
+	//Render sprite
 	public void render(Screen screen){
 		screen.renderTexture(sprite,(int) x, (int)y);
 	}

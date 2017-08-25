@@ -11,7 +11,7 @@ public class Texture {
 	private int[] pixels;
 	private int width;
 	
-	
+	//Loaded textures
 	public static Texture test = new Texture("/test.png");
 	public static Texture player = new Texture("/entities/player.png");
 	public static Texture levelbg = new Texture("/level_bg.png");
@@ -20,12 +20,13 @@ public class Texture {
 	public static Texture trapsensor = new Texture("/entities/trapsensor.png");
 	public static Texture title = new Texture("/title.png");
 	
-	
+	//Create texture from file path
 	public Texture(String path){
 		this.path = path;
 		loadSheet();
 	}
 	
+	//Load image to pixel array
 	public void loadSheet(){
 		BufferedImage image = null;
 		try{
@@ -42,6 +43,7 @@ public class Texture {
 		width = w;
 	}
 	
+	//Get pixel array
 	public int[] getPixels(){
 		return pixels;
 	}

@@ -15,6 +15,7 @@ public class Trap extends Entity{
 	protected boolean visible = false;
 	protected boolean on = true;
 	
+	//Create trap at coords
 	public Trap(Level level, double x, double y, int type){
 		super(level, x, y, type);
 		if(type==0){
@@ -25,12 +26,14 @@ public class Trap extends Entity{
 		height = sprite.getHeight();
 	}
 	
+	//Set visibility of traps
 	public void update(){
 		visible = level.getTrapVision();
 		
 	}
 	
 	public void render(Screen screen){
+		//Render if trap is on or off
 		if(visible && on){
 			screen.renderTexture(Sprite.trapon, (int)x, (int)y);
 		}else if(!on){

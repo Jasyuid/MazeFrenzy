@@ -14,6 +14,7 @@ public class Entity{
 	protected int state;
 	protected int type;
 	
+	//Creates entity at coords
 	public Entity(Level level, double x, double y){
 		this.level = level;
 		this.x = x;
